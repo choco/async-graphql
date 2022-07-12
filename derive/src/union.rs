@@ -84,8 +84,6 @@ pub fn generate(union_args: &args::Union) -> GeneratorResult<TokenStream> {
 
             if !variant.flatten {
                 type_into_impls.push(quote! {
-                    #crate_name::static_assertions::assert_impl_one!(#assert_ty: #crate_name::ObjectType);
-
                     #[allow(clippy::all, clippy::pedantic)]
                     impl #impl_generics ::std::convert::From<#ty> for #ident #ty_generics #where_clause {
                         fn from(obj: #ty) -> Self {
@@ -95,8 +93,6 @@ pub fn generate(union_args: &args::Union) -> GeneratorResult<TokenStream> {
                 });
             } else {
                 type_into_impls.push(quote! {
-                    #crate_name::static_assertions::assert_impl_one!(#assert_ty: #crate_name::UnionType);
-
                     #[allow(clippy::all, clippy::pedantic)]
                     impl #impl_generics ::std::convert::From<#ty> for #ident #ty_generics #where_clause {
                         fn from(obj: #ty) -> Self {
